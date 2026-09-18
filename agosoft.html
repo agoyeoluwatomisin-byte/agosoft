@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agosoft Limited — Build, Buy & Sell Homes in Nigeria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14231C;
+    --forest:#1F4A3A;
+    --forest-2:#2F6B52;
+    --forest-3:#3F8367;
+    --clay:#A8462A;
+    --clay-2:#C25736;
+    --gold:#C89B3C;
+    --sand:#F3EEE3;
+    --sand-2:#EAE2D2;
+    --paper:#FFFDF8;
+    --text:#1C1B18;
+    --text-soft:#5B564C;
+    --line:#DCD4C1;
+    --radius-s:4px;
+    --radius-m:10px;
+    --max:1180px;
+  }
+  :root:not([data-theme="light"]){
+    /* default light theme already matches :root; dark handled below */
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#0E1712;
+      --forest:#7FB79B;
+      --forest-2:#9FCDB6;
+      --forest-3:#3F8367;
+      --clay:#E08A63;
+      --clay-2:#EFA07B;
+      --gold:#E0BB6B;
+      --sand:#141E18;
+      --sand-2:#1B2620;
+      --paper:#101915;
+      --text:#EFEDE4;
+      --text-soft:#B9B4A6;
+      --line:#2A362F;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#0E1712;
+    --forest:#7FB79B;
+    --forest-2:#9FCDB6;
+    --forest-3:#3F8367;
+    --clay:#E08A63;
+    --clay-2:#EFA07B;
+    --gold:#E0BB6B;
+    --sand:#141E18;
+    --sand-2:#1B2620;
+    --paper:#101915;
+    --text:#EFEDE4;
+    --text-soft:#B9B4A6;
+    --line:#2A362F;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--text);
+    font-family:'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Fraunces', Georgia, 'Times New Roman', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--text);
+    margin:0;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+  .overflow-fix{overflow-x:auto;}
+  button{font-family:inherit;}
+
+  ::selection{background:var(--clay);color:#fff;}
+  :focus-visible{outline:2px solid var(--clay);outline-offset:3px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(243,238,227,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  @media (prefers-color-scheme: dark){
+    header.nav{background:rgba(20,30,24,0.86);}
+  }
+  :root[data-theme="dark"] header.nav{background:rgba(20,30,24,0.86);}
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;max-width:var(--max);margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:1.28rem;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:8px;
+    background:linear-gradient(155deg,var(--forest) 0%, var(--forest-3) 100%);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .brand-mark svg{width:19px;height:19px;}
+  .nav-links{display:flex;gap:34px;align-items:center;}
+  .nav-links a{font-size:0.96rem;color:var(--text-soft);transition:color .18s;}
+  .nav-links a:hover{color:var(--clay);}
+  .nav-cta{
+    display:flex;align-items:center;gap:18px;
+  }
+  .nav-phone{font-size:0.94rem;color:var(--text-soft);display:none;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    padding:12px 22px;border-radius:999px;font-size:0.92rem;font-weight:600;
+    cursor:pointer;border:1px solid transparent;white-space:nowrap;
+    transition:transform .16s ease, box-shadow .16s ease, background .16s ease;
+  }
+  .btn-clay{background:var(--clay);color:#fff;}
+  .btn-clay:hover{background:var(--clay-2);transform:translateY(-1px);}
+  .btn-outline{border-color:var(--forest);color:var(--forest);background:transparent;}
+  .btn-outline:hover{background:var(--forest);color:var(--paper);}
+  .btn-ghost{color:var(--text);}
+  @media (min-width:860px){
+    .nav-phone{display:block;}
+  }
+  .menu-btn{display:none;background:none;border:none;padding:8px;cursor:pointer;}
+  .menu-btn svg{width:24px;height:24px;color:var(--text);}
+  @media (max-width:859px){
+    .nav-links{display:none;}
+    .menu-btn{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:78px 0 60px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+  }
+  @media (max-width:940px){
+    .hero-grid{grid-template-columns:1fr;}
+  }
+  .eyebrow-line{
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;color:var(--forest);
+    font-size:0.86rem;font-weight:600;
+  }
+  .eyebrow-line span.dot{width:7px;height:7px;border-radius:50%;background:var(--clay);flex-shrink:0;}
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw, 3.55rem);
+    line-height:1.08;
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--clay);
+  }
+  .hero p.lede{
+    margin-top:22px;font-size:1.13rem;color:var(--text-soft);max-width:520px;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+  .hero-note{margin-top:30px;display:flex;gap:26px;flex-wrap:wrap;}
+  .hero-note div{display:flex;flex-direction:column;}
+  .hero-note strong{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--forest);}
+  .hero-note span{font-size:0.82rem;color:var(--text-soft);}
+
+  .hero-art{position:relative;}
+  .hero-art svg{width:100%;height:auto;}
+
+  /* ---------- TRUST STRIP ---------- */
+  .trust{
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:var(--paper);
+  }
+  .trust-inner{
+    display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:space-between;
+    padding:22px 28px;max-width:var(--max);margin:0 auto;
+    font-size:0.92rem;color:var(--text-soft);
+  }
+  .trust-inner b{color:var(--text);font-weight:600;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section{padding:96px 0;}
+  .section-head{max-width:640px;margin-bottom:56px;}
+  .section-head .kicker{color:var(--clay);font-weight:600;font-size:0.86rem;margin-bottom:14px;display:block;}
+  .section-head h2{font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.15;}
+  .section-head p{margin-top:16px;color:var(--text-soft);font-size:1.05rem;}
+
+  /* ---------- SERVICES (alternating rows) ---------- */
+  .service-row{
+    display:grid;grid-template-columns:80px 1fr;gap:32px;
+    padding:40px 0;border-top:1px solid var(--line);
+    align-items:start;
+  }
+  .service-row:last-child{border-bottom:1px solid var(--line);}
+  .service-icon{
+    width:56px;height:56px;border-radius:50%;
+    background:var(--sand-2);display:flex;align-items:center;justify-content:center;
+  }
+  .service-icon svg{width:26px;height:26px;color:var(--forest);}
+  .service-body h3{font-size:1.55rem;margin-bottom:10px;}
+  .service-body p{color:var(--text-soft);max-width:600px;font-size:1.02rem;}
+  .service-tags{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .service-tags span{
+    font-size:0.8rem;padding:6px 13px;border-radius:999px;
+    background:var(--sand-2);color:var(--text-soft);border:1px solid var(--line);
+  }
+  @media (min-width:760px){
+    .service-row{grid-template-columns:80px 1fr 220px;}
+    .service-side{text-align:right;padding-top:6px;}
+    .service-side .num{font-family:'Fraunces',serif;font-style:italic;font-size:1.05rem;color:var(--text-soft);}
+  }
+
+  /* ---------- DIASPORA SPLIT ---------- */
+  .diaspora{background:var(--forest);color:var(--paper);}
+  .diaspora .section-head p{color:rgba(255,253,248,0.72);}
+  .diaspora .section-head .kicker{color:var(--gold);}
+  .diaspora .section-head h2{color:var(--paper);}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,253,248,0.16);border-radius:16px;overflow:hidden;}
+  @media (max-width:760px){.split{grid-template-columns:1fr;}}
+  .split-col{background:var(--forest);padding:38px 34px;}
+  .split-col.alt{background:#194132;}
+  @media (prefers-color-scheme: dark){ .split-col.alt{background:#0B1712;} }
+  :root[data-theme="dark"] .split-col.alt{background:#0B1712;}
+  .split-col .tag{
+    display:inline-block;font-size:0.78rem;font-weight:600;letter-spacing:0.02em;
+    color:var(--gold);border:1px solid rgba(200,155,60,0.5);padding:5px 12px;border-radius:999px;margin-bottom:18px;
+  }
+  .split-col h3{color:var(--paper);font-size:1.5rem;margin-bottom:14px;}
+  .split-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .split-col li{display:flex;gap:12px;align-items:flex-start;color:rgba(255,253,248,0.82);font-size:0.98rem;}
+  .split-col li svg{width:18px;height:18px;flex-shrink:0;margin-top:3px;color:var(--gold);}
+
+  /* ---------- PROCESS ---------- */
+  .process-list{display:flex;flex-direction:column;}
+  .process-item{
+    display:grid;grid-template-columns:64px 1fr;gap:24px;padding:28px 0;
+    border-top:1px solid var(--line);
+  }
+  .process-item:last-child{border-bottom:1px solid var(--line);}
+  .process-num{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--clay);font-style:italic;}
+  .process-item h3{font-size:1.2rem;margin-bottom:6px;}
+  .process-item p{color:var(--text-soft);max-width:560px;}
+
+  /* ---------- PROPERTY TYPES ---------- */
+  .types-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:860px){.types-grid{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.types-grid{grid-template-columns:1fr;}}
+  .type-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;
+  }
+  .type-art{height:150px;position:relative;}
+  .type-card h4{padding:20px 20px 4px;font-size:1.12rem;}
+  .type-card p{padding:0 20px 20px;color:var(--text-soft);font-size:0.94rem;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-wrap{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;
+  }
+  @media (max-width:900px){.contact-wrap{grid-template-columns:1fr;}}
+  .contact-card{
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:34px;
+  }
+  .contact-card h3{font-size:1.3rem;margin-bottom:8px;}
+  .contact-card p{color:var(--text-soft);margin-bottom:26px;}
+  .contact-line{
+    display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--line);
+  }
+  .contact-line:first-of-type{border-top:none;}
+  .contact-line .ic{
+    width:38px;height:38px;border-radius:10px;background:var(--sand-2);
+    display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  }
+  .contact-line .ic svg{width:18px;height:18px;color:var(--forest);}
+  .contact-line a, .contact-line span.val{font-weight:600;font-size:1.02rem;}
+  .contact-line small{display:block;color:var(--text-soft);font-size:0.8rem;}
+
+  form.msg{display:flex;flex-direction:column;gap:16px;}
+  .field{display:flex;flex-direction:column;gap:7px;}
+  .field label{font-size:0.85rem;color:var(--text-soft);font-weight:600;}
+  .field input, .field textarea, .field select{
+    background:var(--paper);border:1px solid var(--line);border-radius:9px;
+    padding:12px 14px;font-family:inherit;font-size:0.98rem;color:var(--text);
+  }
+  .field textarea{resize:vertical;min-height:100px;}
+  .field input:focus, .field textarea:focus, .field select:focus{
+    border-color:var(--forest-3);outline:none;
+  }
+  .msg .btn{margin-top:6px;width:100%;}
+  .form-note{font-size:0.82rem;color:var(--text-soft);margin-top:10px;text-align:center;}
+  #formOk{
+    display:none;background:var(--sand-2);border:1px solid var(--line);
+    border-radius:10px;padding:16px;font-size:0.94rem;color:var(--forest);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(255,253,248,0.7);padding:56px 0 26px;}
+  .footer-top{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:36px;
+    padding-bottom:36px;border-bottom:1px solid rgba(255,253,248,0.12);
+    margin-bottom:26px;
+  }
+  .footer-brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-size:1.2rem;color:#fff;}
+  .footer-cols{display:flex;gap:64px;flex-wrap:wrap;}
+  .footer-col h5{color:#fff;font-size:0.85rem;margin-bottom:14px;letter-spacing:0.01em;}
+  .footer-col a{display:block;color:rgba(255,253,248,0.68);font-size:0.92rem;margin-bottom:10px;}
+  .footer-col a:hover{color:var(--gold);}
+  .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:0.82rem;color:rgba(255,253,248,0.5);}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11.5L12 4l9 7.5" stroke="#FFFDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 10v8.5a1 1 0 001 1h11a1 1 0 001-1V10" stroke="#FFFDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 19.5V14h5v5.5" stroke="#FFFDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      Agosoft <span style="color:var(--clay)">Limited</span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#diaspora">For the Diaspora</a>
+      <a href="#process">How it works</a>
+      <a href="#properties">Property types</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <span class="nav-phone">0803 401 749</span>
+      <a href="#contact" class="btn btn-clay">Get started</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow-line"><span class="dot"></span> Real estate development &amp; brokerage, Lagos, Nigeria</div>
+        <h1>A home in Nigeria, <em>handled properly</em> — near or far away.</h1>
+        <p class="lede">Agosoft Limited builds, buys and sells houses for Nigerians at home and abroad. One trusted team, from the first site inspection to the day you get your keys.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-clay">Start your project</a>
+          <a href="#diaspora" class="btn btn-outline">I live abroad</a>
+        </div>
+        <div class="hero-note">
+          <div><strong>100%</strong><span>Verified documentation</span></div>
+          <div><strong>Lagos</strong><span>&amp; expanding across Nigeria</span></div>
+          <div><strong>Direct</strong><span>Updates, no middlemen</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of houses under a gradient sky">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="var(--gold)" stop-opacity="0.35"/>
+              <stop offset="100%" stop-color="var(--forest)" stop-opacity="0.06"/>
+            </linearGradient>
+            <linearGradient id="roof1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="var(--clay-2)"/>
+              <stop offset="100%" stop-color="var(--clay)"/>
+            </linearGradient>
+          </defs>
+          <circle cx="440" cy="90" r="230" fill="url(#sky)"/>
+          <circle cx="452" cy="86" r="34" fill="var(--gold)" opacity="0.55"/>
+
+          <!-- ground -->
+          <rect x="0" y="360" width="560" height="100" fill="var(--sand-2)"/>
+
+          <!-- back house -->
+          <g>
+            <rect x="60" y="230" width="140" height="130" fill="var(--paper)" stroke="var(--line)"/>
+            <polygon points="55,232 130,170 205,232" fill="var(--forest-2)"/>
+            <rect x="90" y="270" width="30" height="30" fill="var(--sand-2)" stroke="var(--line)"/>
+            <rect x="150" y="270" width="30" height="30" fill="var(--sand-2)" stroke="var(--line)"/>
+            <rect x="115" y="315" width="30" height="45" fill="var(--forest)"/>
+          </g>
+
+          <!-- main house -->
+          <g>
+            <rect x="220" y="185" width="200" height="175" fill="var(--paper)" stroke="var(--line)" stroke-width="1.5"/>
+            <polygon points="212,188 320,110 428,188" fill="url(#roof1)"/>
+            <rect x="248" y="230" width="42" height="42" fill="var(--sand-2)" stroke="var(--line)"/>
+            <rect x="350" y="230" width="42" height="42" fill="var(--sand-2)" stroke="var(--line)"/>
+            <rect x="300" y="290" width="40" height="70" fill="var(--forest)"/>
+            <circle cx="330" cy="325" r="2.5" fill="var(--gold)"/>
+            <rect x="220" y="185" width="200" height="8" fill="var(--forest-3)"/>
+          </g>
+
+          <!-- front small house -->
+          <g>
+            <rect x="400" y="255" width="120" height="105" fill="var(--paper)" stroke="var(--line)"/>
+            <polygon points="396,257 460,215 524,257" fill="var(--clay)"/>
+            <rect x="425" y="290" width="26" height="26" fill="var(--sand-2)" stroke="var(--line)"/>
+            <rect x="470" y="290" width="26" height="26" fill="var(--sand-2)" stroke="var(--line)"/>
+            <rect x="440" y="330" width="26" height="30" fill="var(--forest)"/>
+          </g>
+
+          <!-- trees -->
+          <g>
+            <rect x="30" y="330" width="7" height="30" fill="var(--forest)"/>
+            <circle cx="33" cy="320" r="20" fill="var(--forest-3)"/>
+            <rect x="530" y="335" width="6" height="25" fill="var(--forest)"/>
+            <circle cx="533" cy="326" r="16" fill="var(--forest-3)"/>
+          </g>
+
+          <!-- pin -->
+          <g transform="translate(465,150)">
+            <path d="M0 0C-13 0-24 11-24 24c0 18 24 40 24 40s24-22 24-40C24 11 13 0 0 0z" fill="var(--clay)"/>
+            <circle cx="0" cy="23" r="8" fill="var(--paper)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust">
+    <div class="trust-inner">
+      <span><b>Build.</b> Custom homes from foundation to finish.</span>
+      <span><b>Buy.</b> Verified land and properties, ready to move.</span>
+      <span><b>Sell.</b> Get a fair valuation and a serious buyer.</span>
+      <span><b>Diaspora-ready.</b> Manage everything from abroad.</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">What we do</span>
+        <h2>Three ways to work with Agosoft</h2>
+        <p>Whether you're starting from an empty plot or a finished property, we handle the parts that usually go wrong — paperwork, contractors and follow-through.</p>
+      </div>
+
+      <div class="service-row reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="service-body">
+          <h3>Build</h3>
+          <p>We manage your build from architectural drawings to handover — sourcing materials, supervising contractors and sharing regular progress updates so nothing gets built without your sign-off.</p>
+          <div class="service-tags"><span>Site inspection</span><span>Architectural plans</span><span>Construction oversight</span><span>Photo &amp; video updates</span></div>
+        </div>
+        <div class="service-side"><span class="num">i.</span></div>
+      </div>
+
+      <div class="service-row reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 10.5L12 4l8 6.5M6 9v11h12V9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20v-6h4v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="service-body">
+          <h3>Buy</h3>
+          <p>We shortlist land and properties that match your budget and plans, verify title documents before you commit a single naira, and represent you at every inspection and meeting.</p>
+          <div class="service-tags"><span>Title verification</span><span>Property shortlist</span><span>Price negotiation</span><span>Handover support</span></div>
+        </div>
+        <div class="service-side"><span class="num">ii.</span></div>
+      </div>
+
+      <div class="service-row reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M3 12l9-9 9 9M5 10v10h14V10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 21v-5a3 3 0 00-6 0v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="service-body">
+          <h3>Sell</h3>
+          <p>We price your property correctly, list it to serious buyers only, and manage viewings and paperwork so you get to a closed deal without the usual back-and-forth.</p>
+          <div class="service-tags"><span>Property valuation</span><span>Buyer screening</span><span>Viewings</span><span>Closing support</span></div>
+        </div>
+        <div class="service-side"><span class="num">iii.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIASPORA -->
+  <section class="section diaspora" id="diaspora">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Wherever you're based</span>
+        <h2>Built for people at home — and people abroad</h2>
+        <p>Most of our clients aren't in the room when the work happens. So we built our process around that.</p>
+      </div>
+
+      <div class="split">
+        <div class="split-col">
+          <span class="tag">Based abroad</span>
+          <h3>Manage your project from anywhere</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Scheduled video calls and site walk-throughs, timed for your time zone</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Secure international and local payment channels, with receipts for every transfer</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>A single point of contact — you're never passed between agents</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Power of attorney and remote-signing support where needed</li>
+          </ul>
+        </div>
+        <div class="split-col alt">
+          <span class="tag">Based in Nigeria</span>
+          <h3>Hands-on service, close to home</h3>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>In-person site visits and inspections whenever you want one</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Local knowledge of neighbourhoods, developers and land documentation</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct introductions to vetted contractors and material suppliers</li>
+            <li><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Fast turnaround on viewings, offers and paperwork</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">How it works</span>
+        <h2>From first conversation to handover</h2>
+        <p>Four stages, whether you're building a new home or buying and selling an existing one.</p>
+      </div>
+      <div class="process-list">
+        <div class="process-item">
+          <div class="process-num">01</div>
+          <div><h3>Consultation</h3><p>Tell us your budget, location and what you're trying to do. We give you an honest read on what's realistic and what it will cost.</p></div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">02</div>
+          <div><h3>Planning &amp; verification</h3><p>We prepare plans or verify title documents before any money changes hands, and walk you through exactly what you're signing.</p></div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">03</div>
+          <div><h3>Execution</h3><p>Construction, purchase negotiation or buyer sourcing happens here, with updates sent to you at every milestone.</p></div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">04</div>
+          <div><h3>Handover</h3><p>Keys, documents and final accounts handed over, with a walkthrough of the finished property or completed sale.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPERTY TYPES -->
+  <section class="section" id="properties" style="background:var(--sand-2)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Property types</span>
+        <h2>Whatever kind of home you have in mind</h2>
+        <p>We work across residential and land categories in and around Lagos, with more locations added as we grow.</p>
+      </div>
+      <div class="types-grid">
+        <div class="type-card">
+          <svg class="type-art" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice"><rect width="400" height="150" fill="var(--sand)"/><polygon points="60,90 140,40 220,90" fill="var(--forest-2)"/><rect x="80" y="90" width="120" height="55" fill="var(--paper)" stroke="var(--line)"/><rect x="260" y="60" width="90" height="85" fill="var(--paper)" stroke="var(--line)"/><polygon points="255,60 305,25 355,60" fill="var(--clay)"/></svg>
+          <h4>Detached &amp; duplex homes</h4>
+          <p>Family houses built to spec, from 3-bedroom bungalows to multi-storey duplexes.</p>
+        </div>
+        <div class="type-card">
+          <svg class="type-art" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice"><rect width="400" height="150" fill="var(--sand)"/><rect x="60" y="35" width="90" height="110" fill="var(--paper)" stroke="var(--line)"/><rect x="160" y="35" width="90" height="110" fill="var(--paper)" stroke="var(--line)"/><rect x="260" y="35" width="90" height="110" fill="var(--paper)" stroke="var(--line)"/><rect x="80" y="55" width="20" height="20" fill="var(--sand-2)"/><rect x="180" y="55" width="20" height="20" fill="var(--sand-2)"/><rect x="280" y="55" width="20" height="20" fill="var(--sand-2)"/></svg>
+          <h4>Terraces &amp; estates</h4>
+          <p>Gated terrace and semi-detached units within managed estate developments.</p>
+        </div>
+        <div class="type-card">
+          <svg class="type-art" viewBox="0 0 400 150" preserveAspectRatio="xMidYMid slice"><rect width="400" height="150" fill="var(--sand)"/><path d="M50,130 L200,60 L350,130 Z" fill="var(--forest-3)" opacity="0.5"/><line x1="90" y1="130" x2="90" y2="70" stroke="var(--clay)" stroke-width="3"/><line x1="200" y1="130" x2="200" y2="55" stroke="var(--clay)" stroke-width="3"/><line x1="310" y1="130" x2="310" y2="70" stroke="var(--clay)" stroke-width="3"/></svg>
+          <h4>Land &amp; plots</h4>
+          <p>Surveyed, documented land for future development or straight resale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="kicker">Get in touch</span>
+        <h2>Tell us what you're trying to do</h2>
+        <p>Reach us directly, or send a short message and we'll get back to you — usually the same day.</p>
+      </div>
+
+      <div class="contact-wrap">
+        <div class="contact-card">
+          <h3>Direct contact</h3>
+          <p>Fastest way to reach the team, wherever you're calling from.</p>
+
+          <div class="contact-line">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.99.36 1.96.68 2.89a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.19-1.25a2 2 0 012.11-.45c.93.32 1.9.55 2.89.68A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div><a href="tel:+2348034017490">0803 401 7490</a><small>Call or WhatsApp</small></div>
+          </div>
+          <div class="contact-line">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4V4z" stroke="currentColor" stroke-width="1.7"/><path d="M4 6l8 7 8-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div><a href="mailto:info@agosoft.com.ng">info@agosoft.com.ng</a><small>Email</small></div>
+          </div>
+          <div class="contact-line">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.7"/></svg></span>
+            <div><span class="val">Lagos, Nigeria</span><small>Serving Lagos, with clients across Nigeria and abroad</small></div>
+          </div>
+          <div class="contact-line">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 2v4M16 2v4M3 10h18" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+            <div><span class="val">Mon – Sat, 8am – 6pm WAT</span><small>Diaspora calls scheduled by appointment</small></div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3>Send a message</h3>
+          <p>Prefer to write it down first? We'll follow up by phone or email.</p>
+          <form class="msg" id="contactForm">
+            <div class="field">
+              <label for="name">Full name</label>
+              <input id="name" type="text" placeholder="Your name" required>
+            </div>
+            <div class="field">
+              <label for="reach">Email or phone</label>
+              <input id="reach" type="text" placeholder="How should we reach you?" required>
+            </div>
+            <div class="field">
+              <label for="interest">I'm looking to</label>
+              <select id="interest">
+                <option>Build a house</option>
+                <option>Buy a property or land</option>
+                <option>Sell a property</option>
+                <option>Something else</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="details">Details</label>
+              <textarea id="details" placeholder="Budget, location, timeline — whatever helps us prepare."></textarea>
+            </div>
+            <button type="submit" class="btn btn-clay">Send message</button>
+            <div id="formOk">Thanks — your message is ready. Please also reach us directly at <strong>info@agosoft.com.ng</strong> or <strong>0803 401 7490</strong> to make sure it reaches us today.</div>
+            <p class="form-note">We reply within one business day — for anything urgent, please call or WhatsApp directly.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="brand-mark" style="width:30px;height:30px;">
+          <svg viewBox="0 0 24 24" fill="none" width="16" height="16"><path d="M3 11.5L12 4l9 7.5" stroke="#FFFDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 10v8.5a1 1 0 001 1h11a1 1 0 001-1V10" stroke="#FFFDF8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Agosoft Limited
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Company</h5>
+          <a href="#services">Services</a>
+          <a href="#process">How it works</a>
+          <a href="#properties">Property types</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <a href="tel:+2348034017490">0803 401 7490</a>
+          <a href="mailto:info@agosoft.com.ng">info@agosoft.com.ng</a>
+          <a href="#">Lagos, Nigeria</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Agosoft Limited. All rights reserved.</span>
+      <span>agosoft.com.ng</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // mobile nav fallback: smooth scroll already via CSS; simple reveal-on-scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    },{threshold:0.15});
+    revealEls.forEach(el=>io.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('in'));
+  }
+
+  const form = document.getElementById('contactForm');
+  const ok = document.getElementById('formOk');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const formNote = form.querySelector('.form-note');
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    const payload = {
+      access_key: "24a7f1f4-f0c8-408e-845b-7652ff7c0401",
+      subject: "New enquiry from agosoft.com.ng",
+      from_name: "Agosoft Limited website",
+      name: document.getElementById('name').value,
+      contact_info: document.getElementById('reach').value,
+      looking_to: document.getElementById('interest').value,
+      message: document.getElementById('details').value
+    };
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        ok.textContent = "Thanks — your message has been sent. We'll get back to you shortly. For anything urgent, call or WhatsApp 0803 401 7490.";
+        ok.style.display = 'block';
+        form.reset();
+        submitBtn.style.display = 'none';
+        if (formNote) formNote.style.display = 'none';
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (err) {
+      ok.textContent = "Something went wrong sending your message. Please call or WhatsApp us directly at 0803 401 7490, or email info@agosoft.com.ng.";
+      ok.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send message';
+    }
+  });
+</script>
+
+</body>
+</html>
